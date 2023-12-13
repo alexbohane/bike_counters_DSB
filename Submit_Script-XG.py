@@ -16,6 +16,8 @@ def _encode_dates(X):
     X['hour'] = X['date'].dt.hour
     return X.drop(columns=['date'])
 
+
+
 def get_estimator():
     date_encoder = FunctionTransformer(_encode_dates)
     categorical_encoder = OneHotEncoder(handle_unknown="ignore")
@@ -43,9 +45,6 @@ y_train = df_train['log_bike_count']
 # Train the model with cross-validation
 pipeline = get_estimator()
 
-# # 5-Fold Cross Validation
-# cv_scores = cross_val_score(pipeline, X_train, y_train, cv=5)
-# print("CV Scores:", cv_scores)
 
 # Fit the model on entire training data
 pipeline.fit(X_train, y_train)
